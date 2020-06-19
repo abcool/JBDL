@@ -18,6 +18,9 @@ public class Users {
 	
 	private String emailID;
 
+	public Users() {
+	}
+
 	public Users(String userName, String password, String emailID) {
 		this.userName = userName;
 		this.password = password;

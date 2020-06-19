@@ -21,7 +21,7 @@ public class BookCategory {
 	
 	private String description;
 
-	@OneToMany(mappedBy= "bookCategory", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy= "category", cascade = CascadeType.ALL)
 	private Set<Book> book;
 	
 	public BookCategory() {

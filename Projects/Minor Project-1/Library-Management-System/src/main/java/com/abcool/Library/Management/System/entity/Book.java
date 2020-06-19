@@ -11,7 +11,7 @@ import javax.persistence.ManyToOne;
 public class Book {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int bookID;
 	
 	private String bookName;

@@ -73,5 +73,56 @@ public class UserService {
 			response.setMsg("System cannot process the request right now, please try again");
 			return response;
 		}
-	}	
+	}
+	
+	public UserResponseDTO updateUserName(UserRequestDTO dto) {
+		UserResponseDTO response = new UserResponseDTO();
+		String userName = dto.getUserName();
+		int id = dto.getUserID();
+		Users u = repo.updateUsername(userName, id);
+		if(u!=null) {
+		response.setUserID(u.getUserID());
+		response.setUserName(u.getUserName());
+		response.setEmailID(u.getEmailID());
+		response.setMsg("Users Name successfully Updated");
+		return response;
+		}else {
+			response.setMsg("There was some problem updating username, please try again");
+			return response;
+		}
+	}
+	
+	public UserResponseDTO updateEmailID(UserRequestDTO dto) {
+		UserResponseDTO response = new UserResponseDTO();
+		String emailID = dto.getEmailID();
+		int id = dto.getUserID();
+		Users u = repo.updateEmaiID(emailID, id);
+		if(u!=null) {
+		response.setUserID(u.getUserID());
+		response.setUserName(u.getUserName());
+		response.setEmailID(u.getEmailID());
+		response.setMsg("Email ID successfully Updated");
+		return response;
+		}else {
+			response.setMsg("There was some problem updating email ID, please try again");
+			return response;
+		}
+	}
+	
+	public UserResponseDTO updatePassword(UserRequestDTO dto) {
+		UserResponseDTO response = new UserResponseDTO();
+		String password = AESEncryption.encrypt(dto.getPassword());
+		int id = dto.getUserID();
+		Users u = repo.updatePassword(password, id);
+		if(u!=null) {
+		response.setUserID(u.getUserID());
+		response.setUserName(u.getUserName());
+		response.setEmailID(u.getEmailID());
+		response.setMsg("Password successfully Updated");
+		return response;
+		}else {
+			response.setMsg("There was some problem updating password, please try again");
+			return response;
+		}
+	}
 }

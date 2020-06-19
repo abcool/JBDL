@@ -11,7 +11,7 @@ import javax.persistence.Id;
 public class BooksIssued {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private int issueID;
 	
 	private String issuedTo;

@@ -2,6 +2,8 @@ package com.abcool.Library.Management.System.DTOs;
 
 public class UserRequestDTO {
 
+	private int userID;
+	
 	private String userName;
 	
 	private String password;
@@ -30,6 +32,14 @@ public class UserRequestDTO {
 
 	public void setEmailID(String emailID) {
 		this.emailID = emailID;
+	}
+
+	public int getUserID() {
+		return userID;
+	}
+
+	public void setUserID(int userID) {
+		this.userID = userID;
 	}
 	
 }
