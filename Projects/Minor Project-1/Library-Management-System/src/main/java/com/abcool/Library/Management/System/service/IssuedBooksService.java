@@ -49,11 +49,15 @@ public class IssuedBooksService {
 		}
 	}
 	
-	public IssuedBookResponseDTO issued(Integer issueID, String bookName,
-			Integer fine, Date issueDate, String issuedTo) {
+	public IssuedBookResponseDTO issued(IssueBookRequestDTO dto) {
 		IssuedBookResponseDTO response = new IssuedBookResponseDTO();
+		Integer issueID = dto.getIssueID();
+		String bookName = dto.getBookName();
+		Integer fine = dto.getFine();
+		String issueDate = dto.getIssueDate();
+		String issuedTo = dto.getIssuedTo();
 		if(issueID!=null) {
-			IssuedBook ibook = repo.getByissueID(issueID);
+			IssuedBook ibook = repo.findByissueID(issueID);
 			if(ibook!=null) {
 			response.setBookName(ibook.getBookName());
 			response.setFine(ibook.getFine());
@@ -65,7 +69,7 @@ public class IssuedBooksService {
 				return response;
 			}
 		}else if(bookName!=null) {
-			IssuedBook ibook = repo.getBybookName(bookName);
+			IssuedBook ibook = repo.findBybookName(bookName);
 			if(ibook!=null) {
 			response.setBookName(ibook.getBookName());
 			response.setFine(ibook.getFine());
@@ -77,7 +81,7 @@ public class IssuedBooksService {
 				return response;
 			}
 		}else if(fine!=null) {
-			IssuedBook ibook = repo.getByfine(fine);
+			IssuedBook ibook = repo.findByfine(fine);
 			if(ibook!=null) {
 			response.setBookName(ibook.getBookName());
 			response.setFine(ibook.getFine());
@@ -89,7 +93,7 @@ public class IssuedBooksService {
 				return response;
 			}
 		}else if(issueDate!=null) {
-			IssuedBook ibook = repo.getByissueDate(issueDate);
+			IssuedBook ibook = repo.findByissueDate(StringToDateConverter.stringToDateConverter(issueDate));
 			if(ibook!=null) {
 			response.setBookName(ibook.getBookName());
 			response.setFine(ibook.getFine());
@@ -101,7 +105,7 @@ public class IssuedBooksService {
 				return response;
 			}
 		}else if(issuedTo!=null) {
-			IssuedBook ibook = repo.getByissuedTo(issuedTo);
+			IssuedBook ibook = repo.findByissuedTo(issuedTo);
 			if(ibook!=null) {
 			response.setBookName(ibook.getBookName());
 			response.setFine(ibook.getFine());
@@ -129,6 +133,66 @@ public class IssuedBooksService {
 			return response;
 			}else {
 				response.setMsg("There occured a problem while issuing book, please try again later");
+				return response;
+			}
+		}else {
+			response.setMsg("Please check entered details");
+			return response;
+		}
+	}
+	
+	public IssuedBookResponseDTO updateIssueBookName(IssueBookRequestDTO dto) {
+		IssuedBookResponseDTO response = new IssuedBookResponseDTO();
+		
+		if(dto!=null) {
+			Integer issueID = repo.findByissueID(dto.getIssueID()).getIssueID();
+			String bookName = dto.getBookName();
+			Integer result = repo.updateIssueBookName(bookName,issueID);
+			if(result!=null) {
+				response.setMsg("Issued Book Name successfully updated");
+				return response;
+			}else {
+				response.setMsg("There occured a problem while updating");
+				return response;
+			}
+		}else {
+			response.setMsg("Please check entered details");
+			return response;
+		}
+	}
+	
+	public IssuedBookResponseDTO updateIssueDate(IssueBookRequestDTO dto) {
+		IssuedBookResponseDTO response = new IssuedBookResponseDTO();
+		
+		if(dto!=null) {
+			Integer issueID = dto.getIssueID();
+			Date issueDate = StringToDateConverter.stringToDateConverter(dto.getIssueDate());
+			Integer result = repo.updateIssueDate(issueDate,issueID);
+			if(result!=null) {
+				response.setMsg("Issued Date successfully updated");
+				return response;
+			}else {
+				response.setMsg("There occured a problem while updating issued date");
+				return response;
+			}
+		}else {
+			response.setMsg("Please check entered details");
+			return response;
+		}
+	}
+	
+	public IssuedBookResponseDTO updateIssuedTo(IssueBookRequestDTO dto) {
+		IssuedBookResponseDTO response = new IssuedBookResponseDTO();
+		
+		if(dto!=null) {
+			Integer issueID = dto.getIssueID();
+			String issuedTo = dto.getIssuedTo();
+			Integer result = repo.updateIssuedTo(issuedTo,issueID);
+			if(result!=null) {
+				response.setMsg("Issuer name successfully updated");
+				return response;
+			}else {
+				response.setMsg("There occured a problem while updating issuer name");
 				return response;
 			}
 		}else {

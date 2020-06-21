@@ -25,9 +25,14 @@ public class BookCategoryController {
 		return service.getCategories();
 	}
 	
-	@GetMapping(path="bookCategory/{categoryID}/{categoryName}", produces="application/json")
+	@GetMapping(path="/bookCategory/{categoryID}/{categoryName}", produces="application/json")
 	public BookCategoryResponseDTO bookCategory(@PathVariable Integer categoryID, @PathVariable String categoryName) {
 			return service.getCategory(categoryID, categoryName);
+	}
+	
+	@GetMapping(path="/bookCategoryWithBooks",produces="application/json")
+	public BookCategoryResponseDTO bookCategoryWithBooks(@RequestBody BookCategoryRequestDTO dto){
+		return service.bookCategoryWithBooks(dto);
 	}
 	
 	@PostMapping(path="/createBookCategory", consumes="application/json", produces="application/json")

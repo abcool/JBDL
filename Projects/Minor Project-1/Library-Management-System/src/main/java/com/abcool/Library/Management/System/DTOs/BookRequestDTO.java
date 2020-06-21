@@ -13,6 +13,10 @@ public class BookRequestDTO {
 	private int publishedYear;
 	
 	private int cost;
+	
+	private Integer categoryID;
+	
+	private String categoryName;
 
 	public int getBookID() {
 		return bookID;
@@ -56,6 +60,22 @@ public class BookRequestDTO {
 
 	public void setCost(int cost) {
 		this.cost = cost;
+	}
+
+	public Integer getCategoryID() {
+		return categoryID;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryID(Integer categoryID) {
+		this.categoryID = categoryID;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 	
 }

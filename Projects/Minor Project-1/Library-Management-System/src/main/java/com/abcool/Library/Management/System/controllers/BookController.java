@@ -3,12 +3,12 @@ package com.abcool.Library.Management.System.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abcool.Library.Management.System.DTOs.BookRequestDTO;
@@ -26,22 +26,14 @@ public class BookController {
 		return service.getBooks();
 	}
 	
-	@GetMapping(path="/book/{authorName}/{bookName}/{cost}/{publishedYear}/{publisher}")
-	public BookResponseDTO book(
-			@PathVariable String authorName, 
-			@PathVariable String bookName,
-			@PathVariable Integer cost, 
-			@PathVariable Integer publishedYear,
-			@PathVariable String publisher) {
-		return service.getBook(authorName, bookName, cost, publishedYear, publisher);
+	@GetMapping(path="/book")
+	public BookResponseDTO book(@RequestBody BookRequestDTO dto) {
+		return service.getBook(dto);
 	}
 	
-	@PostMapping(path="/insertBook/{categoryID}/{categoryName}",consumes="application/json",produces="application/json")
-	public BookResponseDTO insertBook(
-			@PathVariable(value="categoryID") Integer categoryID, 
-			@PathVariable(value="categoryName") String categoryName, 
-			@RequestBody BookRequestDTO dto) {
-		return service.insertBook(categoryID,categoryName,dto);
+	@PostMapping(path="/insertBook",consumes="application/json",produces="application/json")
+	public BookResponseDTO insertBook(@RequestBody BookRequestDTO dto) {
+		return service.insertBook(dto);
 	}
 	
 	@PutMapping(path="/updateBookName")
@@ -64,8 +56,13 @@ public class BookController {
 		return service.updatePublishedYear(dto);
 	}
 	
-	@PutMapping(path="/updateCost")
+	@PutMapping(path="/updateCost",consumes="application/json",produces="application/json")
 	public BookResponseDTO updateCost(@RequestBody BookRequestDTO dto) {
 		return service.updateCost(dto);
+	}
+	
+	@DeleteMapping(path="/deleteBook/{bookID}",produces="application/json")
+	public BookResponseDTO deleteBook(@PathVariable Integer bookID) {
+		return service.deleteBook(bookID);
 	}
 }

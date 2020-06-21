@@ -1,13 +1,12 @@
 package com.abcool.Library.Management.System.controllers;
 
-import java.text.ParseException;
-import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,14 +25,9 @@ public class IssuedBooksController {
 		return service.allIssued();
 	}
 	
-	@GetMapping(path="/issued/{issueID}/{bookName}/{fine}/{issueDate}/{issuedTo}",produces="application/json")
-	public IssuedBookResponseDTO issued(
-			@PathVariable Integer issueID,
-			@PathVariable String bookName,
-			@PathVariable Integer fine,
-			@PathVariable Date issueDate,
-			@PathVariable String issuedTo) {
-		return service.issued(issueID, bookName,fine, issueDate, issuedTo);
+	@GetMapping(path="/issued/",produces="application/json")
+	public IssuedBookResponseDTO issued(@RequestBody IssueBookRequestDTO dto) {
+		return service.issued(dto);
 	}
 	
 	@PostMapping(path="/issueBook",consumes="application/json",produces="application/json")
@@ -43,6 +37,21 @@ public class IssuedBooksController {
 		}catch(Exception e) {
 			return null;
 		}
+	}
+	
+	@PutMapping(path="/updateIssueBookName", consumes="application/json", produces="application/json")
+	public IssuedBookResponseDTO updateIssueBookName(@RequestBody IssueBookRequestDTO dto) {
+		return service.updateIssueBookName(dto);
+	}
+	
+	@PutMapping(path="/updateIssueDate", consumes="application/json", produces="application/json")
+	public IssuedBookResponseDTO updateIssueDate(@RequestBody IssueBookRequestDTO dto) {
+		return service.updateIssueDate(dto);
+	}
+	
+	@PutMapping(path="/updateIssuedTo", consumes="application/json", produces="application/json")
+	public IssuedBookResponseDTO updateIssuedTo(@RequestBody IssueBookRequestDTO dto) {
+		return service.updateIssuedTo(dto);
 	}
 }
 

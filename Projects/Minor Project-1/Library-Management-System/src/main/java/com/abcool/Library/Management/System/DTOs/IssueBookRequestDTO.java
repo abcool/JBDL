@@ -4,13 +4,23 @@ package com.abcool.Library.Management.System.DTOs;
 
 public class IssueBookRequestDTO {
 
+	private Integer issueID;
+	
     private String issuedTo;
 	
 	private String issueDate;
 	
 	private String bookName;
 	
-	private int fine;
+	private Integer fine;
+
+	public Integer getIssueID() {
+		return issueID;
+	}
+
+	public void setIssueID(Integer issueID) {
+		this.issueID = issueID;
+	}
 
 	public String getIssuedTo() {
 		return issuedTo;
@@ -24,7 +34,7 @@ public class IssueBookRequestDTO {
 		return bookName;
 	}
 
-	public int getFine() {
+	public Integer getFine() {
 		return fine;
 	}
 
@@ -40,7 +50,7 @@ public class IssueBookRequestDTO {
 		this.bookName = bookName;
 	}
 
-	public void setFine(int fine) {
+	public void setFine(Integer fine) {
 		this.fine = fine;
 	}
 	

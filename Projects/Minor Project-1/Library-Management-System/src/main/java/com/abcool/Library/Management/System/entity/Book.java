@@ -34,12 +34,13 @@ public class Book {
 	}
 	
 	public Book(String bookName, String authorName, String publisher, int publishedYear, int cost,
-			int categoryID) {
+			int categoryID, char isIssued) {
 		this.bookName = bookName;
 		this.authorName = authorName;
 		this.publisher = publisher;
 		this.publishedYear = publishedYear;
 		this.cost = cost;
+		this.isIssued = isIssued;
 		this.category = new BookCategory();
 		this.category.setCategoryID(categoryID);
 	}

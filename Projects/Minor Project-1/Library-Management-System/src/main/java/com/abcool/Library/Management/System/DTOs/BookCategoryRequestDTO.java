@@ -4,7 +4,7 @@ import java.util.List;
 
 public class BookCategoryRequestDTO {
 
-	private int categoryID;
+	private Integer categoryID;
 	
 	private String categoryName;
 	
@@ -14,7 +14,7 @@ public class BookCategoryRequestDTO {
 	
 	private List<BookRequestDTO> listBookRequestDTO;
 
-	public int getCategoryID() {
+	public Integer getCategoryID() {
 		return categoryID;
 	}
 

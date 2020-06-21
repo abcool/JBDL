@@ -1,5 +1,8 @@
 package com.abcool.Library.Management.System.repository;
 
+import java.util.List;
+import java.util.Set;
+
 import javax.transaction.Transactional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -7,6 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.abcool.Library.Management.System.entity.Book;
+import com.abcool.Library.Management.System.entity.BookCategory;
 
 public interface BookRepository extends JpaRepository<Book, Integer>{
 	
@@ -19,6 +23,10 @@ public interface BookRepository extends JpaRepository<Book, Integer>{
 	public Book findBypublishedYear(Integer year);
 	
 	public Book findBycost(Integer cost);
+	
+	public Book findBybookID(Integer bookID);
+	
+	public List<Book> findBycategory(BookCategory category);
 	
 	@Transactional
 	@Modifying

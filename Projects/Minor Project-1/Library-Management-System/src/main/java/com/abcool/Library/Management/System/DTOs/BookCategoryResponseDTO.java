@@ -1,5 +1,9 @@
 package com.abcool.Library.Management.System.DTOs;
 
+import java.util.List;
+
+import com.abcool.Library.Management.System.entity.Book;
+
 public class BookCategoryResponseDTO {
 
 	private int categoryID;
@@ -9,6 +13,8 @@ public class BookCategoryResponseDTO {
 	private String description;
 	
 	private String msg;
+	
+	private List<Book> books;
 
 	public int getCategoryID() {
 		return categoryID;
@@ -40,6 +46,14 @@ public class BookCategoryResponseDTO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
 	
 }

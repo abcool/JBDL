@@ -11,6 +11,7 @@ import com.abcool.Library.Management.System.DTOs.BookRequestDTO;
 import com.abcool.Library.Management.System.DTOs.BookResponseDTO;
 import com.abcool.Library.Management.System.entity.Book;
 import com.abcool.Library.Management.System.repository.BookRepository;
+import com.abcool.Library.Management.System.repository.IssuedBooksRepository;
 
 @Service
 public class BookService {
@@ -34,6 +35,7 @@ public class BookService {
 				dt.setPublishedYear(b.getPublishedYear());
 				dt.setIsIssued(b.getIsIssued());
 				response.add(dt);
+				
 			}
 			return response;
 		}else {
@@ -44,9 +46,13 @@ public class BookService {
 		}
 	}
 	
-	public BookResponseDTO getBook(String authorName, String bookName, 
-			Integer cost, Integer publishedYear, String publisher) {
+	public BookResponseDTO getBook(BookRequestDTO dto) {
 		BookResponseDTO response = new BookResponseDTO();
+		String authorName = dto.getAuthorName();
+		String bookName = dto.getBookName();
+		Integer cost = dto.getCost();
+		Integer publishedYear = dto.getPublishedYear();
+		String publisher = dto.getPublisher();
 		if(authorName!=null) {
 			Book b = repo.findByauthorName(authorName);
 			response.setAuthorName(b.getAuthorName());
@@ -103,9 +109,11 @@ public class BookService {
 		}
 	}
 	
-	public BookResponseDTO insertBook(Integer categoryID, String categoryName, BookRequestDTO dto) {
+	public BookResponseDTO insertBook(BookRequestDTO dto) {
 		BookResponseDTO response = new BookResponseDTO();
 		Integer cID;
+		String categoryName = dto.getCategoryName();
+		Integer categoryID = dto.getCategoryID();
 		if(categoryName!=null) {
 			cID = categoryRepo.findBycategoryID(categoryName);
 		}else {
@@ -113,10 +121,15 @@ public class BookService {
 		}
 		if(dto!=null) {
 			Book b = new Book(dto.getBookName(),dto.getAuthorName(),dto.getPublisher(),
-					          dto.getPublishedYear(),dto.getCost(),cID);
+					          dto.getPublishedYear(),dto.getCost(),cID ,'N');
+			if(repo.findBybookName(dto.getBookName())==null) {
 			repo.save(b);
 			response.setMsg("Book saved successfully");
 			return response;
+			}else {
+				response.setMsg("Books already exists");
+				return response;
+			}
 		}else {
 			response.setMsg("There occured a problem while saving book details, kindly check enter details");
 			return response;
@@ -214,6 +227,20 @@ public class BookService {
 			}
 		}else {
 			response.setMsg("Please check the details entered");
+			return response;
+		}
+	}
+	
+	public BookResponseDTO deleteBook(Integer bookID) {
+		BookResponseDTO response = new BookResponseDTO();
+		Book b = repo.findBybookID(bookID);
+		char isIssued = b.getIsIssued();
+		if(isIssued=='Y') {
+			response.setMsg("Book is issued, please return the book before deleting");
+			return response;
+		}else {
+			repo.delete(b);
+			response.setMsg("Book " +"\""+b.getBookName() +"\"" + " successfully removed from the library");
 			return response;
 		}
 	}

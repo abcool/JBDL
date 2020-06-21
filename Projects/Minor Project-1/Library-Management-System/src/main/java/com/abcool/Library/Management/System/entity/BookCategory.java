@@ -65,5 +65,10 @@ public class BookCategory {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+
+	public Set<Book> getBook() {
+		return book;
+	}
 	
 }

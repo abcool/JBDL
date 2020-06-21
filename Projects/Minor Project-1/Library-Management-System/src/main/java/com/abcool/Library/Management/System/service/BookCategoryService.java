@@ -14,12 +14,16 @@ import com.abcool.Library.Management.System.DTOs.BookRequestDTO;
 import com.abcool.Library.Management.System.entity.Book;
 import com.abcool.Library.Management.System.entity.BookCategory;
 import com.abcool.Library.Management.System.repository.BookCategoryRepository;
+import com.abcool.Library.Management.System.repository.BookRepository;
 
 @Service
 public class BookCategoryService {
 
 	@Autowired
 	BookCategoryRepository repo;
+	
+	@Autowired
+	BookRepository book_repo;
 	
 	public List<BookCategoryResponseDTO> getCategories(){
 		List<BookCategory> category = repo.findAll();
@@ -110,6 +114,35 @@ public class BookCategoryService {
 			return response;
 		}else {
 			response.setMsg("There occured some problem in updating description of the mentioned category ID, please try again");
+			return response;
+		}
+	}
+	
+	public BookCategoryResponseDTO bookCategoryWithBooks(BookCategoryRequestDTO dto) {
+		BookCategoryResponseDTO response = new BookCategoryResponseDTO();
+		if(dto!=null) {
+			if(dto.getCategoryID()!=null) {
+				BookCategory bc =  repo.findBycategoryID(dto.getCategoryID());
+				List<Book> books = book_repo.findBycategory(bc);
+				response.setBooks(books);
+				response.setCategoryName(bc.getCategoryName());
+				response.setDescription(bc.getDescription());
+				response.setCategoryID(bc.getCategoryID());
+				return response;
+			}else if(dto.getCategoryName()!=null) {
+				BookCategory bc =   repo.findBycategoryName(dto.getCategoryName());
+				List<Book> books = book_repo.findBycategory(bc);
+				response.setBooks(books);
+				response.setCategoryName(bc.getCategoryName());
+				response.setDescription(bc.getDescription());
+				response.setCategoryID(bc.getCategoryID());
+				return response;
+			}else {
+				response.setMsg("Only category ID or name is supported for searching, please try again");
+				return response;
+			}
+		}else {
+			response.setMsg("Please check the details entered");
 			return response;
 		}
 	}
