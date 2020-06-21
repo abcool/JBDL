@@ -7,8 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity
-public class BooksIssued {
+public class IssuedBook {
 
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -20,9 +21,15 @@ public class BooksIssued {
 	
 	private String bookName;
 	
-	private int count;
-	
 	private int fine;
+	
+
+	public IssuedBook(String issuedTo, Date issueDate, String bookName, int fine) {
+		this.issuedTo = issuedTo;
+		this.issueDate = issueDate;
+		this.bookName = bookName;
+		this.fine = fine;
+	}
 
 	public int getIssueID() {
 		return issueID;
@@ -56,13 +63,6 @@ public class BooksIssued {
 		this.fine = fine;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
 
 	public String getBookName() {
 		return bookName;

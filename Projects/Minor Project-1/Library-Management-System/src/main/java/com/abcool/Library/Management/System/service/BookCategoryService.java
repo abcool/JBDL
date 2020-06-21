@@ -29,7 +29,7 @@ public class BookCategoryService {
 			dto.setCategoryID(b.getCategoryID());
 			dto.setCategoryName(b.getCategoryName());
 			dto.setDescription(b.getDescription());
-			dto.setMsg(b.getCategoryName() + "Found");
+			dto.setMsg(b.getCategoryName() + " Found");
 			response.add(dto);
 		}
 		return response;
@@ -68,22 +68,49 @@ public class BookCategoryService {
 	}
 	
 	public BookCategoryResponseDTO enterCategoryWithBooks(
-			String categoryName,
-			String desc,
-			List<BookRequestDTO> dtos) {
+			BookCategoryRequestDTO dto) {
 			Set<Book> books = new HashSet<Book>();
-			for(BookRequestDTO dt:dtos) {
+			for(BookRequestDTO dt:dto.getListBookRequestDTO()) {
 				Book b = new Book();
 				b.setAuthorName(dt.getAuthorName());
 				b.setBookName(dt.getBookName());
 				b.setCost(dt.getCost());
 				b.setPublishedYear(dt.getPublishedYear());
 				b.setPublisher(dt.getPublisher());
+				b.setIsIssued('N');
 				books.add(b);
 			}
-			repo.save(new BookCategory(categoryName,desc, books));
+			repo.save(new BookCategory(dto.getCategoryName(),dto.getDescription(), books));
 			BookCategoryResponseDTO response = new BookCategoryResponseDTO();
 			response.setMsg("New category along with some books successfully added");
 			return response;
+	}
+	
+	public BookCategoryResponseDTO updateBookCategoryName(BookCategoryRequestDTO dto) {
+		int categoryID = dto.getCategoryID();
+		String categoryName = dto.getCategoryName();
+		BookCategoryResponseDTO response = new BookCategoryResponseDTO();
+		Integer result = repo.updateBookCategoryName(categoryID, categoryName);
+		if(result!=null) {			
+			response.setMsg("Category Name successfully updated");
+			return response;
+		}else {
+			response.setMsg("There occured some problem is renaming book category, please try again");
+			return response;
+		}
+	}
+	
+	public BookCategoryResponseDTO updateBookCategoryDescription(BookCategoryRequestDTO dto) {
+		int categoryID = dto.getCategoryID();
+		String description = dto.getDescription();
+		BookCategoryResponseDTO response = new BookCategoryResponseDTO();
+		Integer result = repo.updateBookCategoryDescription(categoryID, description);
+		if(result!=null) {
+			response.setDescription("Category Description successfully updated");
+			return response;
+		}else {
+			response.setMsg("There occured some problem in updating description of the mentioned category ID, please try again");
+			return response;
+		}
 	}
 }

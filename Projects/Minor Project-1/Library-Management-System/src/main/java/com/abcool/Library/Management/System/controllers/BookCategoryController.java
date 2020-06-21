@@ -6,12 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.abcool.Library.Management.System.DTOs.BookCategoryRequestDTO;
 import com.abcool.Library.Management.System.DTOs.BookCategoryResponseDTO;
-import com.abcool.Library.Management.System.DTOs.BookRequestDTO;
 import com.abcool.Library.Management.System.service.BookCategoryService;
 
 @RestController
@@ -30,16 +30,23 @@ public class BookCategoryController {
 			return service.getCategory(categoryID, categoryName);
 	}
 	
-	@PostMapping(path="/enterCategory", consumes="application/json", produces="application/json")
-	public BookCategoryResponseDTO enterCategory(@RequestBody BookCategoryRequestDTO dto) {
+	@PostMapping(path="/createBookCategory", consumes="application/json", produces="application/json")
+	public BookCategoryResponseDTO createBookCategory(@RequestBody BookCategoryRequestDTO dto) {
 		return service.insertCategory(dto);
 	}
 	
-	@PostMapping(path="enterCategoryWithBooks/{categoryName}/{desc}", consumes="application/json", produces="application/json")
+	@PostMapping(path="/enterCategoryWithBooks", consumes="application/json", produces="application/json")
 	public BookCategoryResponseDTO enterCategoryWithBooks(
-			@PathVariable String categoryName,
-			@PathVariable String desc,
-			@RequestBody List<BookRequestDTO> dtos) {
-		return service.enterCategoryWithBooks(categoryName, desc, dtos);
+			@RequestBody BookCategoryRequestDTO dto) {
+		return service.enterCategoryWithBooks(dto);
+	}
+	@PutMapping(path="/updateBookCategoryName", consumes="application/json", produces="application/json")
+	public BookCategoryResponseDTO updateBookCategoryName(@RequestBody BookCategoryRequestDTO dto) {
+		return service.updateBookCategoryName(dto);
+	}
+	
+	@PutMapping(path="/updateBookCategoryDescription", consumes="application/json", produces="application/json")
+	public BookCategoryResponseDTO updateBookCategoryDescription(@RequestBody BookCategoryRequestDTO dto) {
+		return service.updateBookCategoryDescription(dto);
 	}
 }

@@ -79,11 +79,8 @@ public class UserService {
 		UserResponseDTO response = new UserResponseDTO();
 		String userName = dto.getUserName();
 		int id = dto.getUserID();
-		Users u = repo.updateUsername(userName, id);
+		Integer u = repo.updateUsername(userName, id);
 		if(u!=null) {
-		response.setUserID(u.getUserID());
-		response.setUserName(u.getUserName());
-		response.setEmailID(u.getEmailID());
 		response.setMsg("Users Name successfully Updated");
 		return response;
 		}else {
@@ -96,11 +93,8 @@ public class UserService {
 		UserResponseDTO response = new UserResponseDTO();
 		String emailID = dto.getEmailID();
 		int id = dto.getUserID();
-		Users u = repo.updateEmaiID(emailID, id);
+		Integer u = repo.updateEmaiID(emailID, id);
 		if(u!=null) {
-		response.setUserID(u.getUserID());
-		response.setUserName(u.getUserName());
-		response.setEmailID(u.getEmailID());
 		response.setMsg("Email ID successfully Updated");
 		return response;
 		}else {
@@ -113,11 +107,8 @@ public class UserService {
 		UserResponseDTO response = new UserResponseDTO();
 		String password = AESEncryption.encrypt(dto.getPassword());
 		int id = dto.getUserID();
-		Users u = repo.updatePassword(password, id);
+		Integer u = repo.updatePassword(password, id);
 		if(u!=null) {
-		response.setUserID(u.getUserID());
-		response.setUserName(u.getUserName());
-		response.setEmailID(u.getEmailID());
 		response.setMsg("Password successfully Updated");
 		return response;
 		}else {

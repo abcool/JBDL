@@ -2,6 +2,8 @@ package com.abcool.Library.Management.System.DTOs;
 
 public class BookRequestDTO {
 
+	private int bookID;
+	
 	private String bookName;
 	
 	private String authorName;
@@ -11,6 +13,10 @@ public class BookRequestDTO {
 	private int publishedYear;
 	
 	private int cost;
+
+	public int getBookID() {
+		return bookID;
+	}
 
 	public String getBookName() {
 		return bookName;
