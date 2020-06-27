@@ -32,6 +32,9 @@ public class User implements UserDetails{
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
 	
+	public User() {
+	}
+
 	public User(Integer userID, String userName, String password, boolean isActive, String roles) {
 		this.userID = userID;
 		this.userName = userName;
@@ -43,6 +46,7 @@ public class User implements UserDetails{
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String[] authArray = this.roles.split("#");
+		System.out.println(authArray);
 	List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		for(String s:authArray) {
 			GrantedAuthority obj = new SimpleGrantedAuthority(s);

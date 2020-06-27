@@ -6,7 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.abcool.SpringSecurity.SpringSecurityDemo.service.UserService;
@@ -27,14 +27,14 @@ public class DemoConfigWithDB extends WebSecurityConfigurerAdapter{
 		.httpBasic()
 		.and()
 		.authorizeRequests()
-		.antMatchers("/admin/**").hasRole("admin")
-		.antMatchers("/staff/**").hasAnyRole("user","admin")
+		.antMatchers("/admin/**").hasAuthority("admin")
+		.antMatchers("/staff/**").hasAnyAuthority("user","admin")
 		.antMatchers("/**").permitAll()
 		.and()
 		.formLogin();
 	}
 	@Bean
 	public PasswordEncoder getPasswordEncoder() {
-		return NoOpPasswordEncoder.getInstance();
+		return new BCryptPasswordEncoder();
 	}
 }
