@@ -3,8 +3,10 @@ package com.abcool.SpringSecurity.SpringSecurityDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.abcool.SpringSecurity.SpringSecurityDemo.DTOs.DemoRequestDTO;
 import com.abcool.SpringSecurity.SpringSecurityDemo.service.UserService;
 
 @RestController
@@ -29,7 +31,7 @@ public class DemoController {
 	}
 	
 	@PostMapping("/saveUser")
-	public String saveUser(User u) {
-		return service.saveUser(u);
+	public String saveUser(@RequestBody DemoRequestDTO dto) {
+		return service.saveUser(dto);
 	}
 }

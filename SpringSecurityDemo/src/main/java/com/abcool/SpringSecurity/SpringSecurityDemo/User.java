@@ -28,6 +28,7 @@ public class User implements UserDetails{
 	private boolean isActive;
 	
 	private String roles;
+	
 
 	private static final long serialVersionUID = SpringSecurityCoreVersion.SERIAL_VERSION_UID;
 
@@ -35,8 +36,8 @@ public class User implements UserDetails{
 	public User() {
 	}
 
-	public User(Integer userID, String userName, String password, boolean isActive, String roles) {
-		this.userID = userID;
+	public User(Integer id, String userName, String password, boolean isActive, String roles) {
+		this.userID = id;
 		this.userName = userName;
 		this.password = password;
 		this.isActive = isActive;
@@ -80,7 +81,7 @@ public class User implements UserDetails{
 		return this.isActive;
 	}
 
-	public Integer getUserID() {
+	public Integer getid() {
 		return userID;
 	}
 

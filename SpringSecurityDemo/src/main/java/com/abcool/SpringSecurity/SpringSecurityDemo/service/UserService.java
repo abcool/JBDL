@@ -8,6 +8,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import com.abcool.SpringSecurity.SpringSecurityDemo.User;
+import com.abcool.SpringSecurity.SpringSecurityDemo.DTOs.DemoRequestDTO;
 import com.abcool.SpringSecurity.SpringSecurityDemo.Repository.DemoRepository;
 
 @Service
@@ -21,12 +22,12 @@ public class UserService implements UserDetailsService{
 		return repo.findByUserName(username);
 	}
 	
-	public String saveUser(User u) {
+	public String saveUser(DemoRequestDTO dto) {
 		User user = new User();
-		user.setUserName(u.getUsername());
-		user.setPassword(BCrypt.hashpw(u.getPassword(), BCrypt.gensalt(10)));
+		user.setUserName(dto.getUserName());
+		user.setPassword(BCrypt.hashpw(dto.getPassword(), BCrypt.gensalt(10)));
 		user.setActive(true);
-		user.setRoles(u.getRoles());
+		user.setRoles(dto.getRoles());
 		if(repo.save(user) !=null){
 			return "User saved successfully";
 		}else {
