@@ -1,7 +1,6 @@
 package com.abcool.OAuth2DB.entity;
 
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -10,6 +9,19 @@ import javax.persistence.Table;
 
 import lombok.Getter;
 import lombok.Setter;
+
+/**
+ * create table if not exists role_user (
+  role_id int(11) default null,
+  user_id int(11) default null,
+  key role_id (role_id),
+  key user_id (user_id),
+  constraint role_user_ibfk_1 foreign key (role_id) references role (id),
+  constraint role_user_ibfk_2 foreign key (user_id) references user (id)
+) engine=innodb ;
+ * 
+ *
+ */
 
 @Getter
 @Setter

@@ -13,6 +13,17 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * create table if not exists role (
+  id int(11) not null auto_increment,
+  name varchar(255) default null,
+  primary key (id),
+  unique key name (name)
+);
+ * 
+ *
+ */
+
 @Getter
 @Setter
 @Entity

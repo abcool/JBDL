@@ -4,9 +4,18 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 import lombok.Getter;
 import lombok.Setter;
+
+/*
+ * create table if not exists oauth_client_token (
+  token_id VARCHAR(256),
+  token LONG VARBINARY,
+  authentication_id VARCHAR(256) PRIMARY KEY,
+  user_name VARCHAR(256),
+  client_id VARCHAR(256)
+); 
+ */
 
 @Getter
 @Setter

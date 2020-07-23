@@ -8,6 +8,25 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * create table if not exists  oauth_client_details (
+  client_id varchar(255) not null,
+  client_secret varchar(255) not null,
+  web_server_redirect_uri varchar(2048) default null,
+  scope varchar(255) default null,
+  access_token_validity int(11) default null,
+  refresh_token_validity int(11) default null,
+  resource_ids varchar(1024) default null,
+  authorized_grant_types varchar(1024) default null,
+  authorities varchar(1024) default null,
+  additional_information varchar(4096) default null,
+  autoapprove varchar(255) default null,
+  primary key (client_id)
+) engine=innodb ;
+ * 
+ *
+ */
+
 @Getter
 @Setter
 @Entity

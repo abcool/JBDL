@@ -13,6 +13,17 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 
+ * create table if not exists  permission (
+  id int(11) not null auto_increment,
+  name varchar(512) default null,
+  primary key (id),
+  unique key name (name)
+) engine=innodb ;
+ *
+ */
+
 @Getter
 @Setter
 @Entity

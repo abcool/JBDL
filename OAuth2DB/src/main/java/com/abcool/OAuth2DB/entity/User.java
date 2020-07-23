@@ -11,6 +11,23 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * create table if not exists  user (
+  id int(11) not null auto_increment,
+  username varchar(100) not null,
+  password varchar(1024) not null,
+  email varchar(1024) not null,
+  enabled tinyint(4) not null,
+  accountNonExpired tinyint(4) not null,
+  credentialsNonExpired tinyint(4) not null,
+  accountNonLocked tinyint(4) not null,
+  primary key (id),
+  unique key username (username)
+) engine=innodb ;
+ * 
+ *
+ */
+
 @Getter
 @Setter
 @Entity

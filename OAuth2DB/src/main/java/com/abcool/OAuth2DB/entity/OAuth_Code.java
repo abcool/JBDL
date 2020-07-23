@@ -7,6 +7,14 @@ import javax.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * create table if not exists oauth_code (
+  code VARCHAR(256), authentication LONG VARBINARY
+);
+ * 
+ *
+ */
+
 @Getter
 @Setter
 @Entity
