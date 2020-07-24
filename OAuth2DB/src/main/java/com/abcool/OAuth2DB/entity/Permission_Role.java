@@ -1,6 +1,6 @@
 package com.abcool.OAuth2DB.entity;
 
-import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,10 +39,16 @@ public class Permission_Role {
 //	private Integer role_id;
 	
 	@ManyToOne
-	@JoinColumn(name="permissionID", nullable=false)
+	@JoinColumn(name="permission_id", nullable=false)
 	private Permission permission;
 	
+	/**
+	 *  name ="givenName"  givenName in @JoinColumn can be anything, it doesn't matter 
+	 *  but not be same as other entity names in same file. This will be column name 
+	 *  in table of joined column
+	 */
+	
 	@ManyToOne
-	@JoinColumn(name="roleID", nullable=false)
+	@JoinColumn(name="role_id", nullable=false)
 	private Role role;
 }

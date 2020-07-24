@@ -1,6 +1,5 @@
 package com.abcool.OAuth2DB.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -39,10 +38,10 @@ public class Role_User {
 //	private Integer user_id;
 	
 	@ManyToOne
-	@JoinColumn(name="roleID", nullable=false)
+	@JoinColumn(name="role_id", nullable=false)
 	private Role role;
 	
 	@ManyToOne
-	@JoinColumn(name="userID", nullable=false)
+	@JoinColumn(name="user_id", nullable=false)
 	private User user;
 }

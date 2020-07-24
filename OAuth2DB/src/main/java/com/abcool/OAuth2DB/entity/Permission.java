@@ -38,6 +38,10 @@ public class Permission {
 	@Column(length=512, unique=true)
 	private String name;
 	
+	/**
+	 * mappedBy="myName", myName must be equal to object reference of parent 
+	 * in the child table.
+	 */
 	@OneToMany(mappedBy="permission")
 	private Set<Permission_Role> permission_roles;
 }
