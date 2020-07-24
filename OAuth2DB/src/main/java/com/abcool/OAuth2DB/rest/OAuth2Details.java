@@ -12,7 +12,7 @@ import com.abcool.OAuth2DB.service.OAuth2DetailsService;
 
 @RestController
 @RequestMapping("/oauthdetails")
-public class OAuth2Details {
+public class OAuth2Details implements IOAuth2Details{
 
 	@Autowired
 	OAuth2DetailsService service;
