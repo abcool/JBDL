@@ -32,17 +32,17 @@ public class Permission_Role {
 	@Id
 	private Integer id;
 	
-	@Column(length=11)
-	private Integer permission_id;
-	
-	@Column(length=11)
-	private Integer role_id;
+//	@Column(length=11)
+//	private Integer permission_id;
+//	
+//	@Column(length=11)
+//	private Integer role_id;
 	
 	@ManyToOne
-	@JoinColumn(name="id", nullable=false)
+	@JoinColumn(name="permissionID", nullable=false)
 	private Permission permission;
 	
 	@ManyToOne
-	@JoinColumn(name="id", nullable=false)
+	@JoinColumn(name="roleID", nullable=false)
 	private Role role;
 }

@@ -32,17 +32,17 @@ public class Role_User {
 	@Id
 	private Integer id;
 	
-	@Column(length=11)
-	private Integer role_id;
-	
-	@Column(length=11)
-	private Integer user_id;
+//	@Column(length=11)
+//	private Integer role_id;
+//	
+//	@Column(length=11)
+//	private Integer user_id;
 	
 	@ManyToOne
-	@JoinColumn(name="id", nullable=false)
+	@JoinColumn(name="roleID", nullable=false)
 	private Role role;
 	
 	@ManyToOne
-	@JoinColumn(name="id", nullable=false)
+	@JoinColumn(name="userID", nullable=false)
 	private User user;
 }
