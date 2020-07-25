@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.abcool.OAuth2DB.dto.OAuth2DetailsRequestDTO;
 import com.abcool.OAuth2DB.dto.OAuth2DetailsResponseDTO;
-import com.abcool.OAuth2DB.service.OAuth2DetailsService;
+import com.abcool.OAuth2DB.service.OAuth2DetailsServiceImpl;
 
 @RestController
 @RequestMapping("/oauthdetails")
-public class OAuth2Details implements IOAuth2Details{
+public class OAuth2DetailsImpl implements IOAuth2Details{
 
 	@Autowired
-	OAuth2DetailsService service;
+	OAuth2DetailsServiceImpl service;
 	
 	@PostMapping(path="/clientdetails", consumes="application/json")
 	public OAuth2DetailsResponseDTO createClientDetails(@RequestBody OAuth2DetailsRequestDTO requestDTO) {

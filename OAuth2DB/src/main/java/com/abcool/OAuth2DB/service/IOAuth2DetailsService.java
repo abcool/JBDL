@@ -3,7 +3,7 @@ package com.abcool.OAuth2DB.service;
 import com.abcool.OAuth2DB.dto.OAuth2DetailsRequestDTO;
 import com.abcool.OAuth2DB.dto.OAuth2DetailsResponseDTO;
 
-public interface IOAuth2Details {
+public interface IOAuth2DetailsService {
 
 	/**
 	 * @author Arvind Bakshi

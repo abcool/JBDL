@@ -4,9 +4,13 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.springframework.boot.context.properties.ConstructorBinding;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -35,6 +39,7 @@ import lombok.Setter;
 public class User {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(nullable=false,length=11)
 	private String user_id;
 	
@@ -48,17 +53,35 @@ public class User {
 	private String email;
 	
 	@Column(nullable=false,length=1)
-	private char isEnabled;
+	private boolean isEnabled;
 	
 	@Column(nullable=false,length=1)
-	private char isAccountExpired;
+	private boolean isAccountExpired;
 	
 	@Column(nullable=false,length=1)
-	private char isCredentialsExpired;
+	private boolean isCredentialsExpired;
 	
 	@Column(nullable=false,length=1)
-	private char isAccountLocked;
+	private boolean isAccountLocked;
 	
 	@OneToMany(mappedBy="user")
 	private Set<Role_User> role_users;
+
+	public User() {
+		
+	}
+	
+	public User(String user_id, String username, String password, String email, boolean isEnabled, boolean isAccountExpired,
+			boolean isCredentialsExpired, boolean isAccountLocked, Set<Role_User> role_users) {
+		this.user_id = user_id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.isEnabled = isEnabled;
+		this.isAccountExpired = isAccountExpired;
+		this.isCredentialsExpired = isCredentialsExpired;
+		this.isAccountLocked = isAccountLocked;
+		this.role_users = role_users;
+	}
+		
 }

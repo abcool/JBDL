@@ -12,7 +12,7 @@ import com.abcool.OAuth2DB.entity.OAuthClientDetails;
 import com.abcool.OAuth2DB.repository.OAuth2DetailsRepository;
 
 @Service
-public class OAuth2DetailsService implements IOAuth2Details{
+public class OAuth2DetailsServiceImpl implements IOAuth2DetailsService{
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
