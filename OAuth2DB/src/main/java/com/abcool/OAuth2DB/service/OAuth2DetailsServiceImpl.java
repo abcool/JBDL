@@ -14,10 +14,10 @@ import com.abcool.OAuth2DB.repository.OAuth2DetailsRepository;
 @Service
 public class OAuth2DetailsServiceImpl implements IOAuth2DetailsService{
 	
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+//	@Bean
+//	public BCryptPasswordEncoder passwordEncoder() {
+//		return new BCryptPasswordEncoder();
+//	}
 	
 	@Autowired 
 	OAuth2DetailsRepository repo;
