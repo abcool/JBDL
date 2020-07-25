@@ -15,7 +15,7 @@ import com.abcool.OAuth2DB.repository.OAuth2DetailsRepository;
 public class OAuth2DetailsServiceImpl implements IOAuth2DetailsService{
 	
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 	
@@ -23,7 +23,7 @@ public class OAuth2DetailsServiceImpl implements IOAuth2DetailsService{
 	OAuth2DetailsRepository repo;
 	
 	@Autowired
-	private PasswordEncoder passwordEncoder;
+	private PasswordEncoder encoder;
 	
 	public OAuth2DetailsResponseDTO createClientDetails(OAuth2DetailsRequestDTO requestDTO) {
 		OAuth2DetailsResponseDTO response = new OAuth2DetailsResponseDTO();
@@ -32,7 +32,7 @@ public class OAuth2DetailsServiceImpl implements IOAuth2DetailsService{
 		}else {
 		OAuthClientDetails domain = new OAuthClientDetails();
 		domain.setClient_id(requestDTO.getClient_id());
-		domain.setClient_secret(passwordEncoder.encode(requestDTO.getClient_secret()));
+		domain.setClient_secret(encoder.encode(requestDTO.getClient_secret()));
 		domain.setWeb_server_redirect_uri(requestDTO.getWeb_server_redirect_uri());
 		domain.setScope(requestDTO.getScope());
 		domain.setAccess_token_validity(requestDTO.getAccess_token_validity());

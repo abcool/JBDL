@@ -1,6 +1,7 @@
 package com.abcool.OAuth2DB.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +16,11 @@ public class UserDetailsServiceImpl implements IUserDetailsService{
 
 	@Autowired
 	UserDetailsRepository repo;
+	
+	@Bean
+	public UserDetailsAssembler UserDetailsAssembler() {
+		return new UserDetailsAssembler();
+	}
 	
 	@Autowired
 	UserDetailsAssembler userDetailsAssembler;

@@ -17,6 +17,11 @@ public class WebSecurityConfigurationImpl extends WebSecurityConfigurerAdapter i
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
 	
+	@Bean
+	BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	};
+	
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
@@ -25,10 +30,6 @@ public class WebSecurityConfigurationImpl extends WebSecurityConfigurerAdapter i
 		return super.authenticationManagerBean();
 	}
 	
-	@Bean
-	PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	};
 	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
